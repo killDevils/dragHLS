@@ -1,0 +1,7 @@
+Set Variable [$slash; Value: "\\"]
+
+Set Variable [ $commandLine; Value: "python3¶url = '" & Download m3u8::m3u8Address & "'¶import urllib3¶import ffmpy¶from hanziconv import HanziConv¶http = urllib3.PoolManager()¶r =http.request('GET', url)¶text = r.data.decode('utf-8')¶aTagStart = text.find('<source src=')¶start_quote = text.find('" & $slash & "\"', aTagStart)¶end_quote = text.find('" & $slash & "\"', start_quote+1)¶m3u8Url = text[start_quote+1:end_quote]¶h1TagStart = text.find('<h1 class = " & $slash & "\"" & $slash & "\"')¶h1start_quote = text.find('>', h1TagStart)¶h1end_quote = text.find('<', h1start_quote+1)¶h1Title = text[h1start_quote+1:h1end_quote]¶timeTagStart = text.find('<span class = " & $slash & "\"time" & $slash & "\"')¶timestart_quote = text.find('>', timeTagStart)¶timeend_quote = text.find('<', timestart_quote+1)¶timeStamp = text[timestart_quote+2:timeend_quote]¶time1 = timeStamp.replace(' ', '_')¶time2 = time1.replace(':', '')¶name = h1Title¶name1 = HanziConv.toSimplified(name)¶ff = ffmpy.FFmpeg(¶	inputs={m3u8Url: None},¶	outputs={'" & Download m3u8::mp4Path & "/'+time2+'_'+name1+'.mp4': None}¶)¶ff.run()¶"]
+
+Set Variable [ $script; Value: "tell application \"Terminal\"" & "¶" & "	activate" & "¶" & "	do script \""  & $commandLine & "\"" & "¶" & "end tell" ]
+
+Perform AppleScript [ $script ]
