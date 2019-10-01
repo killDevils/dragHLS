@@ -1,4 +1,4 @@
-url = 'http://news.tvb.com/story/5cc5f2c6e603832c68bee8b7/5d90c76ce60383366530c268/港鐵指多個車站遭嚴重破壞-部分明天或未能恢復服務'
+url = 'http://news.tvb.com/story/...'
 
 
 
